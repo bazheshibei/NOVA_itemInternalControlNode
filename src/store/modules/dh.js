@@ -46,28 +46,27 @@ const Dh = {
      * [请求：表格基础数据]
      */
     A_tableData({ state }) {
-      // const res = JSON.parse(localStorage.getItem('大货汇总'))
-      // const { data, nums, title, yjts } = res
+      // const res = JSON.parse(localStorage.getItem('大货汇总 -- 内控'))
+      // const { itemGanttMapList: data = [], count: nums, nodeMapList: title = [], yjts = 10 } = res.data
       // /* 给数据添加属性 */
-      // const list = Tool.mapData(data, yjts, 'nodes')
-      // // console.log('list ----- ', res)
+      // const list = Tool.mapData(data, yjts, 'itemNodeMapList')
       // /* 赋值 */
-      // state.tableData_1 = list //  表格数据
-      // state.pageCount = nums //    总条数
-      // state.tableNodes = title //  列：表格外层
-      // state.loadingPage = false // 隐藏加载动画
+      // state.tableData_1 = list //         表格数据
+      // state.pageCount = parseInt(nums) // 总条数
+      // state.tableNodes = title //         列：表格外层
+      // state.loadingPage = false //        隐藏加载动画
 
       const { pagenum, rownum, loadingPage, filter_data } = state
       if (!loadingPage) {
         state.loadingPage = true
-        // const employeeid = '965BAD8F4EF5C14CE4F607E77D30B9B5'
-        const employeeid = ''
+        const employeeid = '965BAD8F4EF5C14CE4F607E77D30B9B5'
+        // const employeeid = ''
         /* 发起请求 */
         const name = '内控节点管理列表'
         const obj = { filter_data: JSON.stringify(filter_data), gantt_type: 1, pageindex: parseInt(pagenum) - 1, pagesize: rownum, employeeid }
         const suc = function (res) {
-          // console.log(res)
-          // localStorage.setItem('大货内控节点', JSON.stringify(res))
+          console.log(res)
+          localStorage.setItem('大货汇总 -- 内控', JSON.stringify(res))
           const { itemGanttMapList: data = [], count: nums, nodeMapList: title = [], yjts = 10 } = res.data
           /* 给数据添加属性 */
           const list = Tool.mapData(data, yjts, 'itemNodeMapList')
@@ -85,7 +84,7 @@ const Dh = {
      * @param {[Object]} row 当前展开行的数据
      */
     A_tableOtherData({ state }, { row }) {
-      // const res = JSON.parse(localStorage.getItem('大货折叠数据') || '{}')
+      // const res = JSON.parse(localStorage.getItem('大货折叠数据 -- 内控') || '{}')
       // const { index } = row
       // const { data, nums } = res
       // const { tableData_2, loading } = state
@@ -108,7 +107,7 @@ const Dh = {
       const name = '节点列表'
       const obj = { item_gantt_id, page: parseInt(pagenum) - 1, num: rownum, status, node_name, empid }
       const suc = function (res) {
-        // localStorage.setItem('大货折叠数据', JSON.stringify(res))
+        // localStorage.setItem('大货折叠数据 -- 内控', JSON.stringify(res))
         const { data, nums } = res
         const { tableData_2, loading } = state
         /* 给数据添加属性 */
