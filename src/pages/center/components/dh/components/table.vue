@@ -36,12 +36,12 @@
       <!-- 空列 -->
       <!-- tableNodes -->
       <!-- 节点列 -->
-      <el-table-column v-for="(node, nodeKey) in tableNodes" :key="'node_' + nodeKey" :label="node.node_name" :column-key="node.node_code" align="center" min-width="180">
+      <el-table-column v-for="(node, nodeKey) in tableNodes" :key="'node_' + nodeKey" :label="node.node_name" :column-key="node.node_code" align="center" width="140">
         <template slot-scope="scope">
           <div class="comCellBox" v-for="(item, index) in scope.row.itemNodeMapList" :key="nodeKey + '_' + index">
             <div class="comCell" v-if="item.node_id === node.node_id">
-              <p>计划：{{item.plan_enddate}}</p>
-              <p>实际：{{item.actual_enddate === null || item.actual_enddate === '' ? '--' : item.actual_enddate}}</p>
+              <p>计划：{{item.plan_enddate.split(' ')[0]}}</p>
+              <p>实际：{{item.actual_enddate === null || item.actual_enddate === '' ? '--' : item.actual_enddate.split(' ')[0]}}</p>
               <p>
                 状态：<span v-html="item.nodeTypeText"></span>
                 <i class="el-icon-warning" v-if="item.is_show_warning" style="color: #F56C6C;"></i>

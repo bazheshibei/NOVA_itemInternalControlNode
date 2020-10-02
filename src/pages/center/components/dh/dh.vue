@@ -6,15 +6,15 @@
 
     <div class="topBtnLine">
       <div>
-        <el-button class="topBtn" type="primary" size="mini" @click="advancedQuery">高级查询</el-button>
-        <el-button class="topBtn" type="primary" size="mini" @click="f5">刷新</el-button>
-        <el-button class="topBtn" type="primary" size="mini" @click="plant">排计划</el-button>
-        <el-button class="topBtn" type="primary" size="mini" :disabled="!item_gantt_id" @click="edit">调整计划</el-button>
+        <el-button type="primary" size="mini" @click="advancedQuery">高级查询</el-button>
+        <el-button type="primary" size="mini" @click="f5">刷新</el-button>
+        <el-button type="primary" size="mini" @click="plant">排计划</el-button>
+        <el-button type="primary" size="mini" :disabled="!item_gantt_id" @click="edit">调整计划</el-button>
       </div>
     </div>
 
     <!-- 表格组件 -->
-    <com-table :style="tableStyle" :tableHeight="tableHeight"></com-table>
+    <com-table :style="tableStyle" :tableHeight="tableHeight" style="padding-right: 30px;"></com-table>
 
     <!-- 分页 -->
     <div class="paginationBox" ref="bottomBox">
@@ -153,17 +153,12 @@ export default {
 
 /*** 顶部按钮 ***/
 .topBtnLine {
-  width: 100%;
+  width: calc(100% - 30px);
   height: 40px;
+  margin-right: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.topBtn {
-  margin-left: 10px;
-}
-.topBtn:last-child {
-  margin-right: 10px;
 }
 
 /*** 分页 ***/

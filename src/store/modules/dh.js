@@ -59,14 +59,14 @@ const Dh = {
       const { pagenum, rownum, loadingPage, filter_data } = state
       if (!loadingPage) {
         state.loadingPage = true
-        const employeeid = '965BAD8F4EF5C14CE4F607E77D30B9B5'
-        // const employeeid = ''
+        // const employeeid = '965BAD8F4EF5C14CE4F607E77D30B9B5'
+        const employeeid = ''
         /* 发起请求 */
         const name = '内控节点管理列表'
         const obj = { filter_data: JSON.stringify(filter_data), gantt_type: 1, pageindex: parseInt(pagenum) - 1, pagesize: rownum, employeeid }
         const suc = function (res) {
-          console.log(res)
-          localStorage.setItem('大货汇总 -- 内控', JSON.stringify(res))
+          // console.log(res)
+          // localStorage.setItem('大货汇总 -- 内控', JSON.stringify(res))
           const { itemGanttMapList: data = [], count: nums, nodeMapList: title = [], yjts = 10 } = res.data
           /* 给数据添加属性 */
           const list = Tool.mapData(data, yjts, 'itemNodeMapList')
@@ -131,7 +131,7 @@ const Dh = {
     /**
      * [请求：节点完成前验证]
      */
-    A_testItemNodeStatus({ state }, { item_id, item_node_id, completion_method, index }) {
+    A_testItemNodeStatus({ state }, { item_id, item_node_id, completion_method, index, that }) {
       const name = '节点完成前验证'
       const obj = { item_node_id }
       // const obj = { item_node_id: '8a8a806273ec6b4a0173ec76f295000d' }
@@ -151,7 +151,7 @@ const Dh = {
             url = url + path + `?action=${action}&id=${node_complete_id}`
           }
           // eslint-disable-next-line
-          updateWin({ title: '完成节点', width: 1700, height: 700, url, param, onClose() {}, fn() {} })
+          updateWin({ title: '完成节点', width: 1700, height: 700, url, param, onClose() {}, fn() { that.f5(false) } })
         }
         /* 关闭：加载动画 */
         const { loading } = state
