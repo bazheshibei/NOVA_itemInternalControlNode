@@ -7,7 +7,7 @@
     <!-- 按钮组 -->
     <div class="btnLine" :style="btnLineStyle">
       <div>
-        <el-button type="primary" size="mini" @click="f5">刷新</el-button>
+        <el-button type="primary" size="mini" @click="clickSearch">刷新</el-button>
         <el-button type="primary" size="mini" @click="complete">完成节点</el-button>
         <el-button type="primary" size="mini" @click="followUp">节点跟进</el-button>
         <el-button type="primary" size="mini" :disabled="!(choiceRow.item_node_id && choiceRow.is_complete !== 0)" @click="cancel">取消完成</el-button>

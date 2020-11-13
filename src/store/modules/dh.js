@@ -119,12 +119,18 @@ const Dh = {
         state.tableData_2 = Object.assign({}, tableData_2)
         state.loading = Object.assign({}, loading)
         state.pageObj[index].pageCount = nums
+        /* 重置搜索条件 */
+        state.node_name = ''
+        state.status = ''
       }
       const err = function () {
         /* 关闭：加载动画 */
         const { loading } = state
         loading[index] = false
         state.loading = Object.assign({}, loading)
+        /* 重置搜索条件 */
+        state.node_name = ''
+        state.status = ''
       }
       Api({ name, obj, suc, err })
     },
