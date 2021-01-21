@@ -281,6 +281,9 @@ export default {
     pageChange(key, val) {
       const { row: { index }, pageObj } = this
       pageObj[index][key] = val
+      if (key === 'rownum') {
+        pageObj[index].pagenum = 1
+      }
       /** 发起请求 **/
       this._request()
     },

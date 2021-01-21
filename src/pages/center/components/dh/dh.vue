@@ -108,6 +108,9 @@ export default {
     pageChange(name, val) {
       /** 保存数据 **/
       this.$store.commit('saveData', { module: 'Dh', name, obj: val })
+      if (name === 'rownum') {
+        this.$store.commit('saveData', { module: 'Dh', name: 'pagenum', obj: 1 })
+      }
       /** 发起请求 **/
       this._request()
     },

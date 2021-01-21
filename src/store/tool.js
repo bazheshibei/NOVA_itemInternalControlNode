@@ -18,7 +18,7 @@ Tool.mapData = function (list, yjts, name = '') {
   /* 循环数据 */
   list.map(function (item, index) {
     const { actual_enddate } = item
-    const completeTime = typeof actual_enddate === 'string' && actual_enddate ? new Date(actual_enddate).getTime() : now
+    const completeTime = typeof actual_enddate === 'string' && actual_enddate ? new Date(actual_enddate.split(' ')[0]).getTime() : now
     item.index = index
     if (name) {
       let arr = []
@@ -49,9 +49,9 @@ Tool._map = function (item, completeTime, yjts) {
   /* ----- 延期/剩余天数 ----- */
   const num = (completeTime - new Date(item.plan_enddate).getTime()) / (1000 * 60 * 60 * 24) // 超期天数：当前日期 - 计划日期
   if (num > 0) {
-    item.timeText = `<span style="color: red;">${num}</span>` // 延期天数
+    item.timeText = `<span style="color: red;">${isNaN(num) ? '/' : num}</span>` // 延期天数
   } else {
-    item.timeText = `<span>${Math.abs(num)}</span>` // 剩余天数
+    item.timeText = `<span>${isNaN(num) ? '/' : Math.abs(num)}</span>` // 剩余天数
   }
   /* ----- 节点状态 && 预警状态 ----- */
   if (item.actual_enddate !== null && item.actual_enddate) {
@@ -72,7 +72,7 @@ Tool._map = function (item, completeTime, yjts) {
       /* 预警状态：超期未完成 -> 常预警 */
       item.warningText = '<span style="color: #F56C6C;">预警</span>'
       item.is_show_warning = true
-    } else {
+    } else if (num <= 0) {
       item.nodeTypeText = `<span style="color: #909399;">未完成</span>`
       /* 预警状态：未完成 -> 倒计时预警 */
       if (yjts && num >= parseInt(Math.abs(yjts))) {
@@ -81,6 +81,9 @@ Tool._map = function (item, completeTime, yjts) {
       } else {
         item.warningText = '<span>正常</span>' // 倒计时预警：超期天数 < 预警时间 || 没有预警时间
       }
+    } else {
+      item.warningText = ''
+      item.is_show_warning = false
     }
   }
   return item
